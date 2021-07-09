@@ -93,12 +93,12 @@ $(function () {
   blueimp.Gallery(
     [
       {
-        title: 'Sintel',
+        title: 'Perfect Dental',
         type: 'video',
         sources: [
           {
             type: 'video/mp4',
-            src: 'https://ia601504.us.archive.org/30/items/video-1_20210705/Video1.mp4'
+            src: 'https://ia801401.us.archive.org/27/items/final-output-2/--FINAL%20OUTPUT_2.mp4'
           }
           /*{
             type: 'video/mp4',
@@ -110,10 +110,10 @@ $(function () {
           }*/
         ],
         poster:
-          'https://upload.wikimedia.org/wikipedia/commons/b/be/' +
-          'Woman-patient-dentist.jpg'
+          'https://upload.wikimedia.org/wikipedia/commons/1/11/' +
+          'PerfectDental.jpg'
       },
-      {
+     /* {
         title: 'LES TWINS - An Industry Ahead',
         type: 'text/html',
         youtube: 'zi4CIXpx7Bg'
@@ -123,7 +123,7 @@ $(function () {
         type: 'text/html',
         vimeo: '73686146',
         poster: 'https://secure-a.vimeocdn.com/ts/448/835/448835699_960.jpg'
-      }
+      }*/
     ],
     {
       container: '#blueimp-video-carousel',

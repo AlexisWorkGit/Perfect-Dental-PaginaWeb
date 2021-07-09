@@ -9,6 +9,7 @@
   background-position: center bottom;
   background-size: contain;
   background-repeat: no-repeat;
+  transition: all 500ms ease-out;
 }
 .title-testimonial {
   text-align: center;

@@ -45,7 +45,7 @@ h5 {
 }
 .btn {
   background-color: transparent;
-  color: #03a9f4;
+  color: #2c3e9e;
   font-size: 14px;
   font-weight: 600;
   border: 0;
@@ -54,12 +54,12 @@ h5 {
   border-radius: 0;
   display: inline-block;
   text-transform: uppercase;
-  border: 1px solid #03a9f4;
+  border: 1px solid #2c3e9e;
   padding: 10px 15px;
 }
 .btn:hover,
 .btn:focus {
-  background-color: #03a9f4;
+  background-color: #2c3e9e;
   color: #fff;
 }
 .btn-large {
@@ -76,7 +76,7 @@ h5 {
 	Estilos generales
 -------------------------------------------------------------------------------*/
 a {
-  color: #03a9f4;
+  color: #2c3e9e;
 }
 a:hover,
 a:focus {
@@ -143,7 +143,7 @@ ul li {
   margin-top: -10px;
 }
 #header .logo i {
-  color: #03a9f4;
+  color: #2c3e9e;
   font-weight: bolder;
 }
 #header.fixed {
@@ -749,12 +749,12 @@ ul.list-default li {
 	 Teams
 -------------------------------------------------------------------------------*/
 .person {
-  max-width: 270px;
+  max-width: 400px;
   text-align: center;
 }
 .person img {
-  width: 150px;
-  height: 150px;
+  width: 220px;
+  height: 220px;
   margin: auto;
 }
 .person-content {
@@ -768,6 +768,10 @@ ul.list-default li {
   font-size: 13px;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+#doctor1 {
+  margin-left: 150px;
 }
 .social-icons,
 .footer .footer-share {
@@ -983,12 +987,13 @@ footer .fin {
 }
 .foot {
   color: snow !important;
+  font-size: 1.2em !important;
 }
 .foot2 {
   color: lightgray !important;
 }
 .newfoot {
-  color: #ccc;
+  color: whitesmoke;
 }
 
 .PerfectDental {
@@ -1083,6 +1088,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
 input[type="range"]:focus::-moz-range-thumb {
   background: rgba(255, 255, 255, 0.5);
 }
+
 :root {
   --facebook: #3b5999;
   --instagram: #e4405f;
@@ -1097,6 +1103,7 @@ input[type="range"]:focus::-moz-range-thumb {
   margin-left: 1270px !important;
   margin-top: -12px !important;
 }
+
 .facebook {
   margin-top: -75px !important;
 }
@@ -1113,17 +1120,17 @@ input[type="range"]:focus::-moz-range-thumb {
 #IT1 {
   margin-left: 80px !important;
   position: absolute;
-  margin-top: -15px !important;
+  margin-top: -35px !important;
 }
 #WP1 {
   margin-left: 160px !important;
   position: absolute;
-  margin-top: -15px !important;
+  margin-top: -35px !important;
 }
 #FB {
   margin-left: 0px !important;
   position: absolute;
-  margin-top: 60px !important;
+  margin-top: 40px !important;
 }
 .redes-container ul li {
   /*display: inline-block;*/
@@ -1255,13 +1262,26 @@ input[type="range"]:focus::-moz-range-thumb {
     background-color: var(--linkedin);
 }*/
 
+.promo {
+  max-width: 200px !important ;
+  margin-left: 20px !important;
+}
+.promo2 {
+  max-width: 240px !important;
+  margin-left: 52px !important;
+}
+
 @media (max-width: 1300px) {
   .PerfectDental {
-    max-width: 75px !important;
+    max-width: 110px !important;
     position: absolute;
     margin-right: 90px !important;
-    margin-left: 215px;
-    margin-top: -9px;
+    margin-left: 170px;
+    margin-top: -28px;
+  }
+  #Dental {
+    font-size: 1.4em !important;
+    line-height: 25px !important;
   }
   .background-image-holder {
     background: url("../images/Imagen1-Responsive.png") no-repeat center center !important;
@@ -1341,6 +1361,15 @@ input[type="range"]:focus::-moz-range-thumb {
   margin-top: -115px !important;
 }
 
+.BarraInicio {
+  font-size: 1.4em !important;
+  margin-bottom: 20px !important;
+}
+
+.texto {
+  font-size: 1.25em !important;
+}
+
 @media (max-width: 1400px) {
   .redes-container {
     display: none;
@@ -1382,6 +1411,21 @@ input[type="range"]:focus::-moz-range-thumb {
     margin-left: 1000px;
   }
 }
+
+@media (max-width: 1198px) {
+  .promo {
+    max-width: 180px !important ;
+    margin-left: 2px !important;
+  }
+  .promo2 {
+    max-width: 240px !important;
+    margin-left: 12px !important;
+  }
+  #final {
+    margin-top: 40px !important;
+  }
+}
+
 @media (max-width: 1075px) {
   #comparison {
     margin-top: 0px !important;
@@ -1404,6 +1448,21 @@ input[type="range"]:focus::-moz-range-thumb {
     min-height: 588px;
   }
 }
+
+@media (max-width: 990px) {
+  #doctor1 {
+    margin-left: 200px;
+  }
+  .promo {
+    max-width: 400px !important ;
+    margin-left: 150px !important;
+  }
+  .promo2 {
+    max-width: 440px !important;
+    margin-left: 122px !important;
+  }
+}
+
 @media (max-width: 900px) {
   #comparison {
     margin-top: 0px !important;
@@ -1419,14 +1478,17 @@ input[type="range"]:focus::-moz-range-thumb {
     margin-top: -110px !important;
   }
   #IT1 {
-    margin-top: -15px !important;
+    margin-top: -35px !important;
+  }
+  #final {
+    margin-top: 60px !important;
   }
 }
 @media (max-width: 800px) {
   #comparison {
     margin-top: 0px !important;
     z-index: 100;
-    min-height: 656px;
+    min-height: 750px;
   }
   .logoP {
     margin-left: 510px;
@@ -1437,11 +1499,11 @@ input[type="range"]:focus::-moz-range-thumb {
     margin-top: -110px !important;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #comparison {
     margin-top: 0px !important;
     z-index: 100;
-    min-height: 700px;
+    min-height: auto;
   }
   .logoP {
     margin-left: 450px;
@@ -1450,6 +1512,12 @@ input[type="range"]:focus::-moz-range-thumb {
   .logoS {
     margin-left: 550px;
     margin-top: -105px !important;
+  }
+  #doctor1 {
+    margin-left: auto;
+  }
+  .buttons-testimonial {
+    margin-top: 165px;
   }
 }
 
@@ -1481,19 +1549,50 @@ input[type="range"]:focus::-moz-range-thumb {
     margin-left: 450px;
     margin-top: -105px !important;
   }
+  .promo {
+    max-width: 400px !important ;
+    margin-left: 110px !important;
+  }
+  .promo2 {
+    max-width: 440px !important;
+    margin-left: 82px !important;
+  }
+  .buttons-testimonial {
+    margin-top: 185px;
+  }
 }
 
 @media (max-width: 640px) {
   .logoP {
-    margin-left: 340px;
-    margin-top: -185px !important;
+    margin-left: 25px;
+    margin-top: -175px !important;
   }
   .logoS {
-    margin-left: 440px;
-    margin-top: -195px !important;
+    margin-left: 125px;
+    margin-top: -185px !important;
   }
   #textofin {
     display: none;
+  }
+
+  .texto {
+    font-size: 1.05em !important;
+  }
+  .newfoot {
+    display: none;
+  }
+}
+@media (max-width: 570px) {
+  .promo {
+    max-width: 400px !important ;
+    margin-left: 60px !important;
+  }
+  .promo2 {
+    max-width: 440px !important;
+    margin-left: 35px !important;
+  }
+  .buttons-testimonial {
+    margin-top: 205px;
   }
 }
 
@@ -1505,21 +1604,35 @@ input[type="range"]:focus::-moz-range-thumb {
     font-size: 1em !important;
   }
   .foot {
-    font-size: 0.7em !important;
+    font-size: 1.2em !important;
   }
   .foot2 {
-    font-size: 0.7em !important;
+    display: none;
   }
   .logoP {
     margin-left: 20px;
-    margin-top: -170px !important;
+    margin-top: -160px !important;
   }
   .logoS {
     margin-left: 120px;
-    margin-top: -175px !important;
+    margin-top: -170px !important;
   }
   #footo {
     display: none !important;
+  }
+  col-xs-5 col-xs-offset-6 {
+    display: none !important;
+  }
+  .promo {
+    max-width: 380px !important ;
+    margin-left: 0px !important;
+  }
+  .promo2 {
+    max-width: 380px !important;
+    margin-left: 0px !important;
+  }
+  .buttons-testimonial {
+    margin-top: 225px;
   }
 }
 @media (max-width: 420px) {
@@ -1535,18 +1648,65 @@ input[type="range"]:focus::-moz-range-thumb {
   .foot2 {
     font-size: 0.65em !important;
   }
+  .promo {
+    max-width: 355px !important ;
+    margin-left: 0px !important;
+  }
+  .promo2 {
+    max-width: 355px !important;
+    margin-left: 0px !important;
+  }
 }
 @media (max-width: 400px) {
   .contacto {
     font-size: 0.8em !important;
   }
   .contacto_parrafo {
-    font-size: 0.6em !important;
+    font-size: 0.8em !important;
   }
   .foot {
-    font-size: 0.5em !important;
+    font-size: 0.8em !important;
   }
   .foot2 {
-    font-size: 0.5em !important;
+    font-size: 0.8em !important;
+  }
+  .promo {
+    max-width: 330px !important ;
+    margin-left: 0px !important;
+  }
+  .promo2 {
+    max-width: 330px !important;
+    margin-left: 0px !important;
+  }
+  .buttons-testimonial {
+    margin-top: 145px;
+  }
+}
+
+@media (max-width: 376px) {
+  .promo {
+    max-width: 310px !important ;
+    margin-left: 4px !important;
+  }
+  .promo2 {
+    max-width: 310px !important;
+    margin-left: 4px !important;
+  }
+  .buttons-testimonial {
+    margin-top: 155px;
+  }
+}
+
+@media (max-width: 360px) {
+  .promo {
+    max-width: 300px !important ;
+    margin-left: 0px !important;
+  }
+  .promo2 {
+    max-width: 300px !important;
+    margin-left: 0px !important;
+  }
+  .buttons-testimonial {
+    margin-top: 185px;
   }
 }
