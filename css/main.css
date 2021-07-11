@@ -1285,7 +1285,8 @@ input[type="range"]:focus::-moz-range-thumb {
     line-height: 25px !important;
   }
   .background-image-holder {
-    background: url("../images/Imagen1-Responsive.png") no-repeat center center !important;
+    background: url("../images/PerfectDentalRiobambaLogoResponsive.png")
+      no-repeat center center !important;
     -webkit-background-size: cover !important;
     -moz-background-size: cover !important;
     -o-background-size: cover !important;
