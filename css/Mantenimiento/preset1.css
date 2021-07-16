@@ -1,0 +1,40 @@
+a {
+  color: #22b8f0;
+}
+a:hover {
+  color: #0e9cd1;
+}
+ul.social-icons > li a:hover {
+  color: #22b8f0;
+}
+
+.at-title h6 {
+  background: #22b8f0;
+}
+/* Important */
+
+.at-features-item:hover i,
+.at-title b {
+  color: #22b8f0 !important;
+}
+
+.at-title hr {
+  background: #22b8f0 !important;
+}
+
+.at-title hr {
+  background-color: #22b8f0 !important;
+}
+
+.at-features-item i,
+.at-features-item-left i,
+.at-features-item i,
+.at-features-item:hover i {
+  border-color: #22b8f0 !important;
+}
+.at-features-item i {
+  box-shadow: 5px 5px 0 0 #22b8f0 !important;
+}
+.at-features-item-left i {
+  box-shadow: -6px 7px 0px 0px #22b8f0 !important;
+}

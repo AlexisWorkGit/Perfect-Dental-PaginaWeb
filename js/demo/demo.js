@@ -94,36 +94,19 @@ $(function () {
     [
       {
         title: 'Perfect Dental',
-        type: 'video',
-        sources: [
-          {
-            type: 'video/mp4',
-            src: 'https://ia801401.us.archive.org/27/items/final-output-2/--FINAL%20OUTPUT_2.mp4'
-          }
-          /*{
-            type: 'video/mp4',
-            src: 'https://archive.org/download/Sintel/sintel-2048-surround.mp4'
-          },
-          {
-            type: 'video/ogg',
-            src: 'https://archive.org/download/Sintel/sintel-2048-stereo.ogv'
-          }*/
-        ],
-        poster:
-          'https://upload.wikimedia.org/wikipedia/commons/1/11/' +
-          'PerfectDental.jpg'
-      },
-     /* {
-        title: 'LES TWINS - An Industry Ahead',
         type: 'text/html',
-        youtube: 'zi4CIXpx7Bg'
+        youtube: 'bglW944lOcM'
+      },
+     {
+        title: 'Diagnostico Digital | Perfect Dental',
+        type: 'text/html',
+        youtube: '-l44Uq_evlY'
       },
       {
-        title: 'KN1GHT - Last Moon',
+        title: 'Instalaciones | Perfect Dental',
         type: 'text/html',
-        vimeo: '73686146',
-        poster: 'https://secure-a.vimeocdn.com/ts/448/835/448835699_960.jpg'
-      }*/
+        youtube: 'LY_YjsoO_jg'
+      }
     ],
     {
       container: '#blueimp-video-carousel',

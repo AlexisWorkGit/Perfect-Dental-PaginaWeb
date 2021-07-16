@@ -1,0 +1,200 @@
+/*------------------------------------------------------------------------------
+	Common Elements
+--------------------------------------------------------------------------------*/
+
+/* --- Basic typography --- */
+a:active,
+a:focus {
+  outline: 0;
+}
+img {
+  border: none;
+}
+
+/* --- Global K2 container --- */ /* used in popups */
+
+/* --- General padding --- */
+
+/* --- Clearing --- */
+
+/* --- Striped rows (add a different background color enable stripped rows in various listings with K2 content) --- */
+
+/* --- RSS feed icon --- */
+
+/* --- Rating --- */
+
+/* --- CSS added with JavaScript --- */
+
+/* --- ReCaptcha --- */
+
+/* --- Icon Font Support --- */
+/* Reset for users with older overrides */
+
+/* Font assignments */
+
+/* --- Primary lists in modules --- */ /* Example CSS: padding:0;margin:0;list-style:none; */ /* Example CSS: display:block;clear:both;padding:2px 0;border-bottom:1px dotted #ccc; */ /* this class is used to clear all previous floating list elements */ /* class appended on last list item */
+
+/* --- Avatars --- */
+
+/* --- Read more --- */
+
+/* --- Pagination --- */
+
+/* --- Extra fields: CSV data styling --- */
+
+/* --- Featured flags: the classes are repeated further below to indicate placement in the CSS structure --- */
+
+/* --- Separators --- */
+
+/* --- Edit Buttons --- */
+
+/*------------------------------------------------------------------------------
+	Component - Item view
+--------------------------------------------------------------------------------*/ /* this is the item container for this view */ /* Attach a class for each featured item */ /* "Featured" presented in superscript */ /* remove the first CSS border from the left of the toolbar */
+
+/* Author block */
+
+/* Author latest */
+
+/* Related by tag */ /* Add overflow-x:scroll; if you want to enable the scrolling features, as explained in item.php */ /* you need to insert this class in the related li element in item.php for this styling to take effect */
+
+/* Video */ /* for embedded videos (not using AllVideos) */
+
+/* Image Gallery */
+
+/* Article navigation */
+
+/* Comments */
+/* Joomla 1.5 - 2.5 */
+/* Joomla 3.x */
+
+/* "Report comment" form */
+
+/* Back to top link */
+
+/*------------------------------------------------------------------------------
+	Component - Itemlist view (category)
+--------------------------------------------------------------------------------*/
+
+/* --- Category block --- */
+
+/* --- Sub-category block --- */ /* this class is appended to the last container on each row of items (useful when you want to set 0 padding/margin to the last container) */
+
+/* --- Item groups --- */ /* this class is appended to the last container on each row of items (useful when you want to set 0 padding/margin to the last container) */
+
+/* --- Item block for each item group --- */ /* this is the container for each K2 item on this view */
+
+/* Additional class appended to the element above for further styling per group item */ /* Attach a class for each featured item */ /* superscript */
+
+/* Video */ /* for embedded videos (not using AllVideos) */
+
+/* Image Gallery */
+
+/* Anchor link to comments */
+
+/* Read more link */
+
+/* Modified date */
+
+/*------------------------------------------------------------------------------
+	Component - Itemlist view (user)
+--------------------------------------------------------------------------------*/
+
+/* User info block */
+
+/* User items */ /* this is the item container for this view */ /* Attach a class for each featured item */ /* "Unpublished" presented in superscript */
+
+/* Anchor link to comments */
+
+/* Read more link */
+
+/*------------------------------------------------------------------------------
+	Component - Itemlist view (tag)
+--------------------------------------------------------------------------------*/ /* this is the item container for this view */
+
+/* Read more link */
+
+/*------------------------------------------------------------------------------
+	Component - Itemlist view (generic)
+--------------------------------------------------------------------------------*/ /* this is the item container for this view */
+
+/* Read more link */
+
+/* No results found message */
+
+/* --- Google Search (use Firebug or similar tools to inspect the generated HTML, then style accordingly --- */ /* Hide unneeded elements of the results page */
+
+/*------------------------------------------------------------------------------
+	Component - Latest view
+--------------------------------------------------------------------------------*/
+
+/* Category info block */
+
+/* User info block */
+
+/* Latest items list */ /* this is the item container for this view */
+
+/* Video */
+
+/* Anchor link to comments */
+
+/* Read more link */
+
+/* Items presented in a list */
+
+/*------------------------------------------------------------------------------
+	Component - Register & profile page views (register.php & profile.php)
+--------------------------------------------------------------------------------*/
+
+/* Profile edit */
+
+/*------------------------------------------------------------------------------
+	Modules - mod_k2_comments
+--------------------------------------------------------------------------------*/
+
+/* Latest Comments */
+
+/* Top Commenters */
+
+/*------------------------------------------------------------------------------
+	Modules - mod_k2_content
+--------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------
+	Modules - mod_k2_tools
+--------------------------------------------------------------------------------*/
+
+/* --- Archives --- */
+
+/* --- Authors --- */
+
+/* --- Breadcrumbs --- */
+
+/* --- Calendar --- */ /* use this height value so that the calendar height won't change on Month change via ajax */
+
+/* --- Category Tree Select Box --- */
+
+/* --- Category List/Menu --- */
+
+/* Root level (0) */
+
+/* First level (1) */
+
+/* n level (n) - like the above... */
+
+/* --- Search Box --- */
+/* Live search results (fetched via ajax) */
+
+/* --- Tag Cloud --- */
+
+/* --- Custom Code --- */
+
+/*------------------------------------------------------------------------------
+	Modules - mod_k2_user (mod_k2_login is removed since v2.6.x)
+--------------------------------------------------------------------------------*/ /* 2nd level ul */ /* 3rd level ul (and so on...) */
+
+/*------------------------------------------------------------------------------
+	Modules - mod_k2_users
+--------------------------------------------------------------------------------*/
+
+/* --- END --- */
