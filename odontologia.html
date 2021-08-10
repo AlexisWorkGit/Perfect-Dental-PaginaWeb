@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+
+<head>
+    <script>if (navigator.userAgent.match(/MSIE|Internet Explorer/i) || navigator.userAgent.match(/Trident\/7\..*?rv:11/i)) { var href = document.location.href; if (!href.match(/[?&]nowprocket/)) { if (href.indexOf("?") == -1) { if (href.indexOf("#") == -1) { document.location.href = href + "?nowprocket=1" } else { document.location.href = href.replace("#", "?nowprocket=1#") } } else { if (href.indexOf("#") == -1) { document.location.href = href + "&nowprocket=1" } else { document.location.href = href.replace("#", "&nowprocket=1#") } } } }</script>
+    <script>class RocketLazyLoadScripts { constructor(e) { this.triggerEvents = e, this.eventOptions = { passive: !0 }, this.userEventListener = this.triggerListener.bind(this), this.delayedScripts = { normal: [], async: [], defer: [] }, this.allJQueries = [] } _addUserInteractionListener(e) { this.triggerEvents.forEach((t => window.addEventListener(t, e.userEventListener, e.eventOptions))) } _removeUserInteractionListener(e) { this.triggerEvents.forEach((t => window.removeEventListener(t, e.userEventListener, e.eventOptions))) } triggerListener() { this._removeUserInteractionListener(this), "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", this._loadEverythingNow.bind(this)) : this._loadEverythingNow() } async _loadEverythingNow() { this._delayEventListeners(), this._delayJQueryReady(this), this._handleDocumentWrite(), this._registerAllDelayedScripts(), this._preloadAllScripts(), await this._loadScriptsFromList(this.delayedScripts.normal), await this._loadScriptsFromList(this.delayedScripts.defer), await this._loadScriptsFromList(this.delayedScripts.async), await this._triggerDOMContentLoaded(), await this._triggerWindowLoad(), window.dispatchEvent(new Event("rocket-allScriptsLoaded")) } _registerAllDelayedScripts() { document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e => { e.hasAttribute("src") ? e.hasAttribute("async") && !1 !== e.async ? this.delayedScripts.async.push(e) : e.hasAttribute("defer") && !1 !== e.defer || "module" === e.getAttribute("data-rocket-type") ? this.delayedScripts.defer.push(e) : this.delayedScripts.normal.push(e) : this.delayedScripts.normal.push(e) })) } async _transformScript(e) { return await this._requestAnimFrame(), new Promise((t => { const n = document.createElement("script"); let i;[...e.attributes].forEach((e => { let t = e.nodeName; "type" !== t && ("data-rocket-type" === t && (t = "type", i = e.nodeValue), n.setAttribute(t, e.nodeValue)) })), e.hasAttribute("src") && this._isValidScriptType(i) ? (n.addEventListener("load", t), n.addEventListener("error", t)) : (n.text = e.text, t()), e.parentNode.replaceChild(n, e) })) } _isValidScriptType(e) { return !e || "" === e || "string" == typeof e && ["text/javascript", "text/x-javascript", "text/ecmascript", "text/jscript", "application/javascript", "application/x-javascript", "application/ecmascript", "application/jscript", "module"].includes(e.toLowerCase()) } async _loadScriptsFromList(e) { const t = e.shift(); return t ? (await this._transformScript(t), this._loadScriptsFromList(e)) : Promise.resolve() } _preloadAllScripts() { var e = document.createDocumentFragment();[...this.delayedScripts.normal, ...this.delayedScripts.defer, ...this.delayedScripts.async].forEach((t => { const n = t.getAttribute("src"); if (n) { const t = document.createElement("link"); t.href = n, t.rel = "preload", t.as = "script", e.appendChild(t) } })), document.head.appendChild(e) } _delayEventListeners() { let e = {}; function t(t, n) { !function (t) { function n(n) { return e[t].eventsToRewrite.indexOf(n) >= 0 ? "rocket-" + n : n } e[t] || (e[t] = { originalFunctions: { add: t.addEventListener, remove: t.removeEventListener }, eventsToRewrite: [] }, t.addEventListener = function () { arguments[0] = n(arguments[0]), e[t].originalFunctions.add.apply(t, arguments) }, t.removeEventListener = function () { arguments[0] = n(arguments[0]), e[t].originalFunctions.remove.apply(t, arguments) }) }(t), e[t].eventsToRewrite.push(n) } function n(e, t) { let n = e[t]; Object.defineProperty(e, t, { get: () => n || function () { }, set(i) { e["rocket" + t] = n = i } }) } t(document, "DOMContentLoaded"), t(window, "DOMContentLoaded"), t(window, "load"), t(window, "pageshow"), t(document, "readystatechange"), n(document, "onreadystatechange"), n(window, "onload"), n(window, "onpageshow") } _delayJQueryReady(e) { let t = window.jQuery; Object.defineProperty(window, "jQuery", { get: () => t, set(n) { if (n && n.fn && !e.allJQueries.includes(n)) { n.fn.ready = n.fn.init.prototype.ready = function (t) { e.domReadyFired ? t.bind(document)(n) : document.addEventListener("rocket-DOMContentLoaded", (() => t.bind(document)(n))) }; const t = n.fn.on; n.fn.on = n.fn.init.prototype.on = function () { if (this[0] === window) { function e(e) { return e.split(" ").map((e => "load" === e || 0 === e.indexOf("load.") ? "rocket-jquery-load" : e)).join(" ") } "string" == typeof arguments[0] || arguments[0] instanceof String ? arguments[0] = e(arguments[0]) : "object" == typeof arguments[0] && Object.keys(arguments[0]).forEach((t => { delete Object.assign(arguments[0], { [e(t)]: arguments[0][t] })[t] })) } return t.apply(this, arguments), this }, e.allJQueries.push(n) } t = n } }) } async _triggerDOMContentLoaded() { this.domReadyFired = !0, await this._requestAnimFrame(), document.dispatchEvent(new Event("rocket-DOMContentLoaded")), await this._requestAnimFrame(), window.dispatchEvent(new Event("rocket-DOMContentLoaded")), await this._requestAnimFrame(), document.dispatchEvent(new Event("rocket-readystatechange")), await this._requestAnimFrame(), document.rocketonreadystatechange && document.rocketonreadystatechange() } async _triggerWindowLoad() { await this._requestAnimFrame(), window.dispatchEvent(new Event("rocket-load")), await this._requestAnimFrame(), window.rocketonload && window.rocketonload(), await this._requestAnimFrame(), this.allJQueries.forEach((e => e(window).trigger("rocket-jquery-load"))), window.dispatchEvent(new Event("rocket-pageshow")), await this._requestAnimFrame(), window.rocketonpageshow && window.rocketonpageshow() } _handleDocumentWrite() { const e = new Map; document.write = document.writeln = function (t) { const n = document.currentScript; n || console.error("WPRocket unable to document.write this: " + t); const i = document.createRange(), r = n.parentElement; let a = e.get(n); void 0 === a && (a = n.nextSibling, e.set(n, a)); const o = document.createDocumentFragment(); i.setStart(o, 0), o.appendChild(i.createContextualFragment(t)), r.insertBefore(o, a) } } async _requestAnimFrame() { return new Promise((e => requestAnimationFrame(e))) } static run() { const e = new RocketLazyLoadScripts(["keydown", "mousemove", "touchmove", "touchstart", "touchend", "wheel"]); e._addUserInteractionListener(e) } } RocketLazyLoadScripts.run();
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="geo.region" content="EC" />
+    <meta name="geo.placename" content="Riobamba" />
+    <meta name="geo.position" content="-1.6627683;,-78.6633804,17" />
+    <meta name="ICBM" content="-1.6627683, -78.6633804,17" />
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+    <!-- Google Tag Manager for WordPress by gtm4wp.com -->
+    <script data-cfasync="false" data-pagespeed-no-defer type="text/javascript">//<![CDATA[
+        var gtm4wp_datalayer_name = "dataLayer";
+        var dataLayer = dataLayer || [];
+//]]>
+    </script>
+    <!-- End Google Tag Manager for WordPress by gtm4wp.com -->
+    <!-- This site is optimized with the Yoast SEO Premium plugin v16.6 (Yoast SEO v16.6.1) - https://yoast.com/wordpress/plugins/seo/ -->
+    <title>Odontologia General | Perfect Dental</title>
+    <meta name="description"
+        content="Clinica Dental en Riobamba | Perfect Dental procurando y reguargando la seguridad y confianza de sus clientes." />
+    <link rel="canonical" href="odontologia.html" />
+    <meta property="og:locale" content="es_EC" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Odontologia General" />
+    <meta property="og:description"
+        content="Clinica Dental en Riobamba | Perfect Dental procurando y reguargando la seguridad y confianza de sus clientes." />
+    <meta property="og:url" content="https://www.perfectdentalriobamba.com/odontologia" />
+    <meta property="og:site_name" content="Perfect Dental" />
+    <meta property="article:publisher" content="https://www.facebook.com/perfectdentalriobamba" />
+    <meta property="og:image" content="https://commons.wikimedia.org/wiki/File:PerfectDentalRiobambaLogo.webp" />
+    <link rel='dns-prefetch' href='http://code.jquery.com/' />
+    <link rel='dns-prefetch' href='http://www.google.com/' />
+    <link rel="stylesheet" href="css/Tratamientos/style.min.css">
+    <link rel="stylesheet" href="css/Tratamientos/admin-bar.css">
+    <link rel="stylesheet" href="css/Tratamientos/main.css">
+    <link rel="stylesheet" href="css/Tratamientos/modulobox.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style id='modulobox-inline-css' type='text/css'>
+        .mobx-overlay {
+            background-color: rgba(30, 18, 18, 0.7);
+        }
+
+        .mobx-top-bar {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        button.mobx-prev,
+        button.mobx-next {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .mobx-bottom-bar {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .mobx-holder .mobx-share-tooltip {
+            background-color: #ffffff;
+            border-color: #ffffff;
+            color: #444444;
+            width: 120px;
+        }
+
+        .mobx-thumb:after {
+            border-color: #ffffff;
+        }
+
+        .mobx-holder .mobx-loader {
+            border-color: rgba(255, 255, 255, 0.2);
+            border-left-color: #ffffff;
+        }
+
+        .mobx-top-bar * {
+            color: #ffffff;
+        }
+
+        .mobx-prev *,
+        .mobx-next * {
+            color: #ffffff;
+        }
+
+        .mobx-thumb-loaded {
+            opacity: 0.50;
+        }
+
+        .mobx-active-thumb .mobx-thumb-loaded {
+            opacity: 1.00;
+        }
+
+        .mobx-top-bar button {
+            height: 40px;
+            width: 40px;
+        }
+
+        .mobx-timer {
+            height: 24px;
+            width: 24px;
+        }
+
+        button.mobx-prev,
+        button.mobx-next {
+            height: 32px;
+            width: 44px;
+        }
+
+        .mobx-share-tooltip button {
+            height: 40px;
+            width: 40px;
+        }
+
+        .mobx-caption-inner {
+            max-width: 420px;
+        }
+
+        .mobx-holder .mobx-counter {
+            font-weight: 400;
+            color: #ffffff;
+            text-align: center;
+            font-size: 13px;
+            line-height: 44px;
+            font-style: normal;
+            text-decoration: none;
+            text-transform: none;
+        }
+
+        .mobx-holder .mobx-title {
+            font-weight: 400;
+            color: #eeeeee;
+            text-align: center;
+            font-size: 13px;
+            line-height: 18px;
+            font-style: normal;
+            text-decoration: none;
+            text-transform: none;
+        }
+
+        .mobx-holder .mobx-desc {
+            font-weight: 400;
+            color: #bbbbbb;
+            text-align: center;
+            font-size: 12px;
+            line-height: 16px;
+            font-style: normal;
+            text-decoration: none;
+            text-transform: none;
+        }
+    </style>
+    <style id='rocket-lazyload-inline-css' type='text/css'>
+        .rll-youtube-player {
+            position: relative;
+            padding-bottom: 56.23%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .rll-youtube-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            background: 0 0
+        }
+
+        .rll-youtube-player img {
+            bottom: 0;
+            display: block;
+            left: 0;
+            margin: auto;
+            max-width: 100%;
+            width: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: none;
+            height: auto;
+            cursor: pointer;
+            -webkit-transition: .4s all;
+            -moz-transition: .4s all;
+            transition: .4s all
+        }
+
+        .rll-youtube-player img:hover {
+            -webkit-filter: brightness(75%)
+        }
+
+        .rll-youtube-player .play {
+            height: 72px;
+            width: 72px;
+            left: 50%;
+            top: 50%;
+            margin-left: -36px;
+            margin-top: -36px;
+            position: absolute;
+            background: url(../app/plugins/wp-rocket/assets/img/youtube.png) no-repeat;
+            cursor: pointer
+        }
+        #desple .itemB {
+            position: relative;
+            }
+
+            .navigation > ul > li > ul {
+            position: absolute;
+            }
+
+            .navigation > ul > li > ul > a {
+            display: block !important;
+            float: left !important;
+            position: absolute;
+            margin-top: 0px;
+
+            width: 140px;
+            }
+
+            .navigation > ul > li > ul {
+            display: none;
+            }
+
+            .navigation > ul > li:hover > ul {
+            display: block;
+            }
+
+            .itemB:hover > a {
+            color: #22b8f0;
+            }
+
+            .itemB {
+            text-align: center;
+            border: 1px solid #ddd;
+            }
+
+            .itemB > a {
+            text-align: center;
+            padding-right: 25px;
+            }
+
+            #desple {
+            margin-left: 50px;
+            }
+            @media (max-width: 1024px) {
+            #desple {
+                margin-left: 40.5%;
+                margin-top: -20px;
+            }
+            .navigation > ul > li > ul {
+                display: block;
+            }
+            .itemB {
+                text-align: center;
+                padding-top: -5px;
+                background-color: #22b8f0 !important;
+            }
+            #espacio {
+                margin-top: 350px;
+            }
+            .itemB:hover > a {
+                color: #000;
+            }
+            .itemB {
+                border: 1px solid #ddd;
+            }
+            .itemB > a {
+            text-align: center;
+            padding-right: 0px;
+            }
+            @media (max-width: 864px) {
+  #desple {
+    margin-left: 38.5%;
+    margin-top: -20px;
+  }
+}
+@media (max-width: 664px) {
+  #desple {
+    margin-left: 34.5%;
+    margin-top: -20px;
+  }
+}
+@media (max-width: 540px) {
+  #desple {
+    margin-left: 30.5%;
+    margin-top: -20px;
+  }
+}
+@media (max-width: 460px) {
+  #desple {
+    margin-left: 27.5%;
+  }
+}
+@media (max-width: 360px) {
+  #desple {
+    margin-left: 24.5%;
+  }
+}
+}
+    </style>
+    <script src="js/tratamientos/jquery.modal.min.js" id="jquery-core-js"></script>
+    <!-- Google Tag Manager for WordPress by gtm4wp.com -->
+    <script data-cfasync="false" data-pagespeed-no-defer type="text/javascript">//<![CDATA[
+        var google_tag_params = { "pageTitle": "Odontologia General | Perfect Dental", "pagePostType": "page", "pagePostType2": "single-page", "pagePostAuthorID": 1, "pagePostAuthor": "admin", "pagePostDate": "11 julio, 2021", "pagePostDateYear": "2021", "pagePostDateMonth": "07", "pagePostDateDay": "11" };
+        var dataLayer_content = { "pageTitle": "Odontologia General | Perfect Dental", "pagePostType": "page", "pagePostType2": "single-page", "pagePostAuthorID": 1, "pagePostAuthor": "admin", "pagePostDate": "11 julio, 2021", "pagePostDateYear": "2021", "pagePostDateMonth": "07", "pagePostDateDay": "11", "google_tag_params": window.google_tag_params };
+        dataLayer.push(dataLayer_content);//]]>
+    </script>
+    <style id="wpsp-style-frontend"></style>
+    <noscript>
+        <style id="rocket-lazyload-nojs-css">
+            .rll-youtube-player,
+            [data-lazy-src] {
+                display: none !important;
+            }
+        </style>
+    </noscript>
+    <script type="rocketlazyloadscript">document.documentElement.classList.add('js');</script>
+
+
+    <link rel="shortcut icon" href="images/tratamientos/logoperfectdental.ico">
+    <link rel="icon" sizes="180x180" href="images/tratamientos/apple-touch-icon-180x180.ico">
+
+
+    <link rel="preload"
+        href="https://github.com/v3ga/murmur/blob/master/bin/doc/html/murmur_js/css/font/Theinhardt-Regular.otf"
+        as="font" type="font/otf" crossorigin>
+</head>
+
+<body data-cmplz=1
+    class="page page-id-324 wp-schema-pro-2.6.2 prostodoncia app-data index-data singular-data page-data page-324-data page-prostodoncia-data"
+    id="swipeme">
+    <header id="header">
+        <section class="banner" role="banner">
+            <div class="header-content clearfix"> <a class="logo" href="index.html"
+                    style="text-transform: capitalize !important;"><img
+                        src="images/PerfectDentalRiobambaLogoResponsive.webp" alt="Perfect Dental Riobamba"
+                        class="PerfectDental"> Perfect Dental</a>
+                <nav class="navigation" role="navigation">
+                    <ul class="primary-nav">
+                        <li><a href="index.html" class="BarraInicio">Inicio</a></li>
+                        <li><a href="#" class="BarraInicio">Tratamientos</a>
+                            <ul id="desple" style="position: absolute;">
+                            <li class="itemB" style="position: absolute; margin-top: 20px; width: 200px; height: 50px; padding-top: 12px; background-color:  rgba(245, 245, 245, 0.89);"><a href="odontologia.html"  target="_blank"> Odontologia</a></li>
+                            <li class="itemB" style="position: absolute; margin-top: 70px; width: 200px; height: 50px; padding-top: 12px; background-color:  rgba(245, 245, 245, 0.89);"><a href="cirugiaoral.html"  target="_blank"> Cirugia Oral </a></li>
+                            <li class="itemB" style="position: absolute;  margin-top: 120px; width: 200px;  height: 50px;padding-top: 12px;background-color: rgba(245, 245, 245, 0.89);"><a href="ortodoncia.html" target="_blank"> Ortodoncia</a></li>
+                            <li class="itemB" style="position: absolute;  margin-top: 170px; width: 200px; height: 50px;padding-top: 12px; background-color: rgba(245, 245, 245, 0.89);"> <a href="ortopedia.html" target="_blank"> Ortopedia </a></li>
+                            <li class="itemB" style="position: absolute; margin-top: 220px;width: 200px; height: 50px; padding-top: 12px ;background-color: rgba(245, 245, 245, 0.89);" > <a href="implantes.html" target="_blank"> Implantes </a></li>
+                            <li class="itemB" style="position: relative; margin-top: 270px;width: 200px; height: 50px; padding-top: 12px ;background-color: rgba(245, 245, 245, 0.89);"> <a href="esteticadental.html" target="_blank"> Estetica Dental </a></li>
+                            </ul>  </li>
+                        <li id="espacio"><a href="odontologia.html" class="BarraInicio">Odontologia</a></li>
+                    </ul>
+                </nav>
+                <div class="redes-container">
+                    <ul>
+                        <li><a href="https://www.facebook.com/perfectdentalriobamba" target="_blank" class="facebook"><i
+                                    class="fab fa-facebook"></i></a></li>
+                    </ul>
+                </div>
+                <div class="redes-container" id="IT">
+                    <ul>
+                        <li><a href="https://www.instagram.com/perfectdentalriobamba/" target="_blank"
+                                class="instagram"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+                <div class="redes-container" id="WP">
+                    <ul>
+                        <li><a href=" https://wa.me/5930983695633?text=Muy%20buenas!%20Necesito%20información"
+                                target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
+                    </ul>
+                </div>
+                <a href="#" class="nav-toggle">Menu<span></span></a>
+            </div>
+    </header>
+    <div class="wrap" role="document">
+        <div class="content">
+            <main class="main">
+                <!--  HERO -->
+                <section class="hero -dark -boxed">
+                    <div class="hero__img">
+                        <picture>
+                            <div class="bg_animate">
+                                <div class="header_navegacion">
+                                    <div class="contenedor"></div>
+                                </div>
+
+                                <section class="bannerr contenedor">
+                                    <secrion class="banner_title"> </secrion>
+                                    <div class="banner_img">
+                                        <img src="/images/tratamientos/OdontologiaGeneral.webp" alt="Odontologia En Riobamba Ecuador" />
+                                    </div>
+                                </section>
+
+                                <div class="burbujas">
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                    <div class="burbuja"></div>
+                                </div>
+                            </div>
+                        </picture>
+                        <div class="hero__content" data-aos="slide-left">
+                            <div class="hero__tag">
+                                OdontologÍa General
+                            </div>
+                            <h1 class="hero__title">
+                                <b>DiagnÓstico </b> y seguimiento de tu sonrisa
+                            </h1>
+                            <p class="hero__text--desktop">
+                                La odontología es la ciencia de la salud que se centra en el diagnóstico, <strong
+                                    style="color: #FFF;">tratamiento y prevención</strong> Habitualmente, su uso se debe
+                                a la necesidad o deseo de corregir
+                                de las enfermedades de la cavidad bucal. Además de los dientes, este sistema incluye las
+                                encías, el tejido periodontal, el maxilar superior, el maxilar inferior y la
+                                articulación temporomandibular.
+                            </p>
+                        </div>
+                        <div class="hero__scroll -name uppercase">
+                            + Doctor Carlos Guaño Costales
+                        </div>
+                        <div class="hero__scroll -scroll uppercase">
+                            Perfect Dental
+                        </div>
+                    </div>
+                    <div class="hero__text--mobile">
+                        <h2>
+                            Odontología General
+                        </h2>
+                        <p>
+                            La odontología es la ciencia de la salud que se centra en el diagnóstico, <strong
+                                style="color: #FFF;">tratamiento y prevención</strong> Habitualmente, su uso se debe a
+                            la necesidad o deseo de corregir
+                            de las enfermedades de la cavidad bucal. Además de los dientes, este sistema incluye las
+                            encías, el tejido periodontal, el maxilar superior, el maxilar inferior y la articulación
+                            temporomandibular.
+
+                        </p>
+                    </div>
+                </section>
+                <!--  FormCta -->
+                <div class="formCta">
+                    <h3>
+                        Pide
+                        <br>
+                        tu cita
+                    </h3>
+                    <p>
+                        <strong>Comienza el cambio Perfect Dental</strong>
+                    </p>
+                    <div class="formCta__rule">
+                    </div>
+                    <a class="btn btn-pink"
+                        href="https://wa.me/5930983695633?text=Muy%20buenas!%20Necesito%20información%20de%20Estética%20Dental"
+                        target="_blank">
+                        <span class="btn__span">
+                            Te ayudamos
+                        </span>
+                    </a>
+                </div>
+                <!-- End FormCta -->
+                <!-- End HERO -->
+                <!--  descBoxed -v2 -->
+                <section class="section -fw descBoxed -v2 -v22 -invert -pd-hero">
+                    <div class="container -box-v1">
+                        <div class="descBoxed__content">
+                            <div class="subtitle" data-aos="slide-right" data-aos-delay="0">
+                                Evitamos todos los problemas de tu sonrisa
+                            </div>
+                            <h2 class="title" data-aos="slide-right" data-aos-delay="0">
+                                Revisión y <b>Diagnostico</b> General
+                            </h2>
+                            <p class="descBoxed__slogan -p-justify" data-aos="slide-right" data-aos-delay="0">
+                                Habitualmente, el odontólogo general es quien realiza el<strong> diagnóstico primario
+                                    del paciente en su visita al dentista </strong> y lo deriva adecuadamente a cada
+                                especialista de acuerdo con el diagnóstico y la necesidad. Aun así, el odontólogo
+                                también trata algunas enfermedades comunes.
+                                En Perfect Dental contamos con los mejores profesionales para identificar tus problemas
+                                bucales.
+                            </p>
+                        </div>
+                        <div class="descBoxed__img">
+                            <figure class="-img-box-pink" data-aos="fade-up" data-aos-delay="500">
+                                <img alt="Especialistas en Odontologia" class="cld-responsive"
+                                    src="images/tratamientos/PerfectDental1.webp" />
+                            </figure>
+                        </div>
+                    </div>
+                </section>
+                <!--  End-descBoxed v2 -->
+                <!--  split -->
+                <div class="split -invert">
+                </div>
+                <!--  End split
+<!--  descBoxed -v7 -->
+                <section class="section -fw descBoxed -v7 -dark">
+                    <div class="descBoxed__content">
+                        <div class="container">
+                            <div>
+                                <h2 class="title" data-aos="slide-left" data-aos-delay="50">
+                                    ¿Cuándo sé que debo acudir al  <b>Odontólogo </b>?
+                                </h2>
+                                <div class="-tip uppercase" data-aos="slide-left" data-aos-delay="50">
+                                    Dolor y Mal aliento
+                                </div>
+                            </div>
+                            <div>
+                                <p class="-p-justify" data-aos="slide-left" data-aos-delay="50+">
+                                    Acudir al odontólogo con regularidad es <strong>imprescindible,</strong> para
+                                    mantener una buena salud bucodental. Muchos pacientes solo acuden a la consulta
+                                    cuando detectan problemas en su boca. Como la inflamación en las encías, el
+                                    sangrado, o la acumulación de sarro.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="descBoxed__img">
+                        <img alt="Instalaciones Perfect Dental" class="cld-responsive"
+                            src="images/tratamientos/PerfectDentalImagenlarga.webp" />
+                        <!-- Botón Plus-->
+                        <a class="btn btn-circle lightbox" href="#plus-modal" data-type="HTML" data-width="900"
+                            data-height="500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 42 42">
+                                <path fill="#fff" stroke="#fff" d="M42 20H22V0h-2v20H0v2h20v20h2V22h20z" />
+                            </svg>
+                        </a>
+                        <div id="plus-modal" style="display: none">
+                            <div class="modal card card__container">
+                                <a aria-label="close" class="card__close">
+                                    <svg class="mobx-svg -black">
+                                        <use class="mobx-use" xlink:href="#mobx-svg-close"></use>
+                                    </svg>
+                                </a>
+                                <div class="-slogan">Trabajamos con lo ultimo en Tecnologia Dental y con los profesionales </div>
+                            </div>
+                        </div>
+                        <!-- Fin Botón Plus-->
+                        <div class="vertical-txt uppercase">
+                            + Prevenir es mejor que lamentar
+                        </div>
+                    </div>
+                </section>
+                <!--  End-descBoxed v7 -->
+                <!--  split Btn-->
+                <div class="split--btn">
+                    <a class="btn btn-pink lightbox"
+                        href="https://wa.me/5930983695633?text=Muy%20buenas!%20Necesito%20información%20de%20Estética%20Dental"
+                        target="_blank">
+                        <span class="btn__span">
+                            ¿Quieres que te llamemos?
+                        </span>
+                    </a>
+                </div>
+                <!--  End split Btn-->
+                <!--  Features V2 light-->
+                <section class="section features -fw -v2 -light">
+                    <div class="container">
+                        <svg enable-background="new 0 0 64 64" height="0px" viewbox="0 0 64 64" width="0px" x="0px"
+                            xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+                            <defs>
+                                <lineargradient gradientunits="userSpaceOnUse" id="fb-shadow-gradient" x1="0" x2="100%"
+                                    y1="0" y2="100%">
+                                    <stop offset="0" stop-color="#81a8d9">
+                                    </stop>
+                                    <stop offset="1" stop-color="#f3a7c9">
+                                    </stop>
+                                </lineargradient>
+                            </defs>
+                        </svg>
+                        <div class="features__desc">
+
+                            <h3 data-aos="fade-down" data-aos-delay="0">
+                                Tratamientos de Odontología General
+                            </h3>
+                            <p data-aos="fade-down" data-aos-delay="100">
+                                En Perfect Dental realizamos el diagnóstico y seguimiento de tus problemas bucales, y poder darle pronta solución a precios cómodos.
+                            </p>
+                        </div>
+                        <ul class="card__group">
+                            <li class="card -invert">
+                                <div class="card__img" data-aos="zoom-in" data-aos-delay="100">
+                                    <figure class="-img-box-pink fondoimagen">
+                                        <img alt="Limpieza oral Riobamba" class="cld-responsive fondo"
+                                            src="images/portafolio/06.webp">
+
+                                    </figure>
+                                </div>
+
+                                <div class="card__container">
+                                    <div class="card__title h5 underline">
+                                        <br> <strong> Diagnóstico y <b> Limpieza</b></strong>
+                                    </div>
+                                    <div class="card__txt">
+
+                                        <p>
+                                            En nuestro sistema, el odontólogo general realiza el diagnóstico primario
+                                            del paciente, resuelve los problemas de restauración de caries que pueda
+                                            presentar y lo canaliza adecuadamente a cada especialista de acuerdo a la
+                                            necesidad del paciente.
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="card -invert">
+                                <div class="card__img" data-aos="zoom-in" data-aos-delay="150">
+                                    <figure class="-img-box-pink fondoimagen">
+                                        <img alt="Dientes Manchados Riobamba" class="cld-responsive fondo"
+                                            src="images/tratamientos/DientesManchadosPerfectDental.webp" />
+                                    </figure>
+                                </div>
+                                <br>
+                                <div class="card__container">
+                                    <div class="card__title h5 underline">
+                                        <br> <strong> Dientes <b> Manchados </b></strong>
+                                    </div>
+                                    <div class="card__txt">
+                                        <p>
+                                            Si la tinción es superficial, se puede eliminar con una simple limpieza bucal, si esta tinción es un poco más profunda, entonces podemos utilizar unos sistemas de blanqueamiento dental. Si la tinción es severa y profunda, se puede utilizar como tratamiento el sistema de diseño de sonrisa.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="card -invert">
+                                <div class="card__img" data-aos="zoom-in" data-aos-delay="200">
+                                    <figure class="-img-box-pink fondoimagen">
+                                        <img alt="Endodoncia Riobamba" class="cld-responsive fondo"
+                                            src="images/tratamientos/EndodonciaPerfectDental.webp" />
+                                    </figure>
+                                </div>
+                                <br>
+                                <div class="card__container">
+                                    <div class="card__title h5 underline">
+                                        <br><strong> Endodoncia </strong>
+                                    </div>
+                                    <div class="card__txt">
+                                        <p>
+                                            La endodoncia en términos generales es el tratamiento de los conductos del
+                                            diente.
+                                            Una de las primeras razones es la caries, ésta provoca una desmineralización del tejido dental y con ello una pérdida de parte de la estructura del diente con lo que la pulpa se queda desprotegida. Esto normalmente provoca alta sensibilidad la temperatura y finalmente dolor. Esto significa que la pulpa se ha inflamado.
+                                             </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="card -invert">
+                                <div class="card__img" data-aos="zoom-in" data-aos-delay="250">
+                                    <figure class="-img-box-pink fondoimagen">
+                                        <img alt="Caries y Sarro Riobamba" class="cld-responsive fondo"
+                                            src="images/tratamientos/sarro.webp" />
+                                    </figure>
+                                </div>
+                                <br>
+                                <div class="card__container">
+                                    <div class="card__title h5 underline">
+                                        <br> <strong> Caries y <b>Sarro</b></strong>
+                                    </div>
+                                    <div class="card__txt">
+                                        <p>
+                                            Limpieza dental profesional: también conocida como profilaxis dental, es una
+                                            limpieza que suele realizar el higienista dental. Con herramientas
+                                            específicas, se higieniza la superficie dentaria y los espacios
+                                            interdentales. Nuestro consejo es que una o dos veces al año te sometas a
+                                            estas limpiezas en el dentista.
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!--  End Features V2 light-->
+                <!--  split -->
+                <div class="split -invert">
+                </div>
+                <!--  End split
+<!--  descBoxed -v3 -->
+                <section class="section descBoxed -fw -v3 -dark">
+                    <div class="container">
+                        <div class="descBoxed__content">
+                            <h3 class="title" data-aos="fade-left">
+                                Bienvenido a nuestra Clínica Dental
+                            </h3>
+                        </div>
+                        <div class="descBoxed__img -zoom">
+                            <a class="lightbox btn-play -pink -outline" href="https://www.youtube.com/watch?v=bglW944lOcM">
+                                <div class="btn-play__icon">
+                                    <svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="circle" cx="99.3" cy="99.3" r="99.3">
+                                        </circle>
+                                        <path class="triangle" d="M79.5 144V54.6l59.6 44.7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </a>
+                            <img alt="Odontologia Riobamba" class="cld-responsive"
+                                src="images/tratamientos/PerfectDental4.webp" />
+                            <div class="vertical-txt uppercase">
+                                + Play
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--  split -->
+                <!--  End split -->
+
+
+                <!-- cta v4 black-->
+
+                <!--  split -->
+                <div class="split -invert -hidden-sm-up">
+                </div>
+                <!--  End split -->
+                <!--  split -->
+                <div class="split -hidden-sm-up">
+                </div>
+                <!--  End split -->
+                <!--  Casos descBoxed v9 invert-->
+                <section class="section -fw descBoxed -v9 -pd-5 -bg-grey">
+                    <div class="container -box -box-white -box-v7">
+                        <div class="descBoxed__img -to-right -zoom">
+                            <a class="btn-play -outline lightbox" href="https://www.youtube.com/watch?v=MmJzWRSoP3M">
+                                <div class="btn-play__icon">
+                                    <svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="circle" cx="99.3" cy="99.3" r="99.3">
+                                        </circle>
+                                        <path class="triangle" d="M79.5 144V54.6l59.6 44.7z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </a>
+                            <img alt="Dr Perfect Dental" class="cld-responsive"
+                                src="images/tratamientos/OdontologiaPerfectDental.webp" />
+                        </div>
+                        <div class="descBoxed__content -box-v4 -box-grey">
+                            <h2 class="title" data-aos="fade-up">
+                                Sonrisa Perfect Dental
+                            </h2>
+                            <p data-aos="fade-up">
+                                Es el procedimiento que consiste en aceptar a un paciente, reconocer que tiene un problema y descubrir la causa de este, e idear un plan de tratamiento que resolverá y aliviara tal problema. La metodología a desarrollarse para la planificación del diagnóstico comprende etapas fundamentales como: la anamnesis o interrogatorio, el análisis por imágenes (aspecto radiográfico) y si es necesaria solicitud de análisis complementarias.
+                            </p>
+                            <a class="btn btn-pink btn-sm"
+                                href="https://wa.me/5930983695633?text=Muy%20buenas!%20Necesito%20información%20de%20Estética%20Dental">
+                                <span class="btn__span"> Agendar una cita </span> </a>
+                            <!-- imageCompare -->
+                            <div class="imgCompare_wrapper">
+                                <div class="imgCompare__lines">
+                                </div>
+                                <div class="imgCompare">
+                                    <div>
+                                        <img alt="Antes Perfect Dental" class="cld-responsive"
+                                            src="images/tratamientos/DientesManchadosPerfectDental.webp" />
+                                    </div>
+                                    <div>
+                                        <img alt="Después Perfect Dental" class="cld-responsive"
+                                            src="images/tratamientos/DespuesDientesManchados.webp" />
+                                    </div>
+                                </div>
+                                <div class="imgCompare__labels">
+                                    <div class="imgCompare__label">
+                                        Antes
+                                    </div>
+                                    <div class="imgCompare__label">
+                                        Después
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+                <section class='section features -pd-5 -fw -vblog -light'>
+                    <div class='container' style='flex-direction: column;'>
+                        <div class='features__desc' style='justify-content:center;'>
+                            <h3 style='margin-top: 0;font-weight:bold;'>
+                                Otros Tratamientos
+                            </h3>
+                        </div>
+                        <div class='row' style='justify-content: center;'><a class="btn btn-ghost--black btn-sm"
+                                href="https://www.perfectdentalriobamba.com/ortodoncia"
+                                style="display:block;padding: 0.5rem;margin: 0.5rem;">
+                                Ortodoncia
+                            </a><a class="btn btn-ghost--black btn-sm"
+                                href="https://www.perfectdentalriobamba.com/esteticadental"
+                                style="display:block;padding: 0.5rem;margin: 0.5rem;">
+                                Estética Dental
+                            </a><a class="btn btn-ghost--black btn-sm"
+                                href="https://www.perfectdentalriobamba.com/implantes"
+                                style="display:block;padding: 0.5rem;margin: 0.5rem;">
+                                Implantes Dentales
+                            </a><a class="btn btn-ghost--black btn-sm"
+                                href="https://www.perfectdentalriobamba.com/ortopedia"
+                                style="display:block;padding: 0.5rem;margin: 0.5rem;">
+                                Ortopedia
+                            </a><a class="btn btn-ghost--black btn-sm"
+                                href="https://www.perfectdentalriobamba.com/cirugiaoral"
+                                style="display:block;padding: 0.5rem;margin: 0.5rem;">
+                                Cirugia Oral
+                            </a><a class="btn btn-ghost--black btn-sm"
+                                href="https://www.perfectdentalriobamba.com/odontologia"
+                                style="display:block;padding: 0.5rem;margin: 0.5rem;">
+                                Odontologia General
+
+                            </a></div>
+                    </div>
+                </section>
+                <!-- cta v4 grey-->
+                <section class="cta -v4">
+                    <div class="cta__img -zoom">
+                        <img alt="Contacto Clínica Dental Perfect Dental" class="cld-responsive"
+                            src="images/tratamientos/Imagen1.webp" />
+                    </div>
+                    <div class="cta__content -bg-grey">
+                        <div class="cta__slogan">
+                            <h3>
+                                ¿Necesitas atención personalizada?
+                            </h3>
+                            <p class="uppercase">
+                                Escribenos y atenderemos tu caso
+                            </p>
+                        </div>
+                        <a class="btn btn-sm btn-pink"
+                            href="https://wa.me/5930983695633?text=Muy%20buenas!%20Necesito%20información%20de%20Estética%20Dental">
+                            <span class="btn__span">
+                                Pide cita
+                            </span>
+                        </a>
+                    </div>
+                </section>
+                <!-- end cta grey-->
+            </main>
+            <div class="footer">
+                <div class="container-fluid">
+                    <div id="map-row" class="row">
+                        <div class="col-xs-12">
+                            <div style="width: 100%"><iframe scrolling="no" marginheight="0" marginwidth="0"
+                                    src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=Perfect%20Dental+(Perfect%20Dental)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                                    width="100%" height="400" frameborder="0"></iframe><a
+                                    href="https://www.mapsdirections.info/en/measure-map-radius/"></a></div>
+                            <div id="map-overlay" class="col-xs-5 col-xs-offset-6">
+                                <div id="infor">
+                                    <h2 style="margin-top:0;color:#fff;" class="contacto">Contactenos</h2>
+                                    <address style="color:#fff;">
+                                        <strong class="contacto_parrafo" style="font-size: 1.5em;">Perfect
+                                            Dental</strong><br>
+                                        <br>
+                                        <p class="foot">Av. Daniel León Borja<br>
+                                            y Jacinto Gonzales<br>
+                                            Riobamba-Ecuador<br>
+                                        </p>
+                                        <abbr title="Phone" class="foot">Tel: (03) 294-2798, 0983695633</abbr>
+                                    </address>
+                                    <p class="foot">© 2021 Bintash.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <div class="fin">
+                    <br>
+                    <h3 class="newfoot" id="footo">POLÍTICA DE PRIVACIDAD</h3>
+                    <p class="newfoot" id="textofin" style="text-align: justify;">El presente Política de Privacidad
+                        establece los
+                        términos en que Perfect Dental usa y protege la información que es proporcionada por sus
+                        usuarios al momento
+                        de
+                        utilizar su sitio web. Esta compañía está comprometida con la seguridad de los datos de sus
+                        usuarios. Cuando
+                        le
+                        pedimos llenar los campos de información personal con la cual usted pueda ser identificado, lo
+                        hacemos
+                        asegurando que sólo se empleará de acuerdo con los términos de este documento. Sin embargo esta
+                        Política de
+                        Privacidad puede cambiar con el tiempo o ser actualizada por lo que le recomendamos y
+                        enfatizamos revisar
+                        continuamente esta página para asegurarse que está de acuerdo con dichos cambios. </p>
+
+                    <br>
+                    <!-- <h4 class="newfoot">Cookies</h4>
+        <p class="newfoot" id="textofin" style="text-align: justify;">Nuestro sitio web emplea las cookies para poder
+          identificar las páginas que son visitadas y su frecuencia. Esta información es empleada únicamente para
+          análisis
+          estadístico y después la información se elimina de forma permanente. Usted puede eliminar las cookies en
+          cualquier momento desde su ordenador. Sin embargo las cookies ayudan a proporcionar un mejor servicio de los
+          sitios web, estás no dan acceso a información de su ordenador ni de usted, a menos de que usted así lo quiera
+          y
+          la proporcione directamente. Usted puede aceptar o negar el uso de cookies, sin embargo la mayoría de
+          navegadores aceptan cookies automáticamente pues sirve para tener un mejor servicio web. También usted puede
+          cambiar la configuración de su ordenador para declinar las cookies. Si se declinan es posible que no pueda
+          utilizar algunos de nuestros servicios. </p>-->
+                    <hr>
+                    <br>
+                    <br>
+                    <div class="redes-container1" id="FB">
+                        <ul>
+                            <li><a href="https://www.facebook.com/perfectdentalriobamba" target="_blank"
+                                    class="facebook"><i class="fab fa-facebook"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="redes-container1" id="IT1">
+                        <ul>
+                            <li><a href="https://www.instagram.com/perfectdentalriobamba/" target="_blank"
+                                    class="instagram"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="redes-container1" id="WP1">
+                        <ul>
+                            <li><a href=" https://wa.me/5930983695633?text=Muy%20buenas!%20Necesito%20información"
+                                    target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="redes-container1" id="YT">
+                        <ul>
+                            <li><a href=" https://www.youtube.com/channel/UC3HIKatNJdfCbI9-rBsItjw" target="_blank"
+                                    class="instagram"><i class="fab fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <img src="images/SENESCYT-LOGO.webp" alt="Senescyt" class="logoS">
+                    <img src="images/PerfectDentalRiobambaPng.webp" alt="PerfectDental1" class="logoP">
+                </div>
+                <p class="pie">© Todos los derechos reservados Bintash. 2021</p>
+            </footer>
+
+            <script data-minify="1"
+                src="../app/cache/min/1/ajax/libs/jquery-modal/0.9.2/jquery.modal.min18ad.js?ver=1626430276"
+                defer></script>
+            <script data-minify="1"
+                src="../app/cache/min/1/app/themes/fb/dist/scripts/main_2b9627c818ad.js?ver=1626430276"
+                id="sage/main.js-js" defer></script>
+            <script data-minify="1"
+                src="../app/cache/min/1/app/plugins/modulobox/public/assets/js/modulobox50c7.js?ver=1626430277"
+                id="modulobox-js" defer></script>
+            <script id="modulobox-js-after">
+                (function ($) {
+                    "use strict"; var mobx_options = { "mediaSelector": ".lightbox, a.tg-media-button", "spacing": "0.10", "loop": 3, "rightToLeft": 0, "smartResize": 1, "overflow": 0, "threshold": 5, "preload": 1, "timeToIdle": 4000, "history": 0, "mouseWheel": 1, "contextMenu": 1, "scrollBar": 1, "loadError": "ha ocurrido un error mientras se cargaba el contenido...", "noContent": "No se ha encontrado contenido", "pinchToClose": 1, "tapToClose": 1, "dragToClose": 1, "doubleTapToZoom": 1, "pinchToZoom": 1, "prevNextKey": 1, "escapeToClose": 1, "scrollSensitivity": 15, "scrollToNav": 0, "scrollToZoom": 0, "scrollToClose": 0, "controls": ["zoom", "fullScreen", "close"], "prevNext": 1, "prevNextTouch": 0, "caption": 1, "autoCaption": 0, "captionSmallDevice": 1, "thumbnails": 1, "thumbnailsNav": "basic", "thumbnailSizes": { "1920": { "width": 110, "height": 80, "gutter": 10 }, "1280": { "width": 90, "height": 65, "gutter": 10 }, "680": { "width": 70, "height": 50, "gutter": 8 }, "480": { "width": 60, "height": 44, "gutter": 5 } }, "shareButtons": ["facebook", "googleplus", "twitter", "pinterest", "linkedin", "reddit"], "shareText": "Compartir en", "sharedUrl": "deeplink", "slideShowInterval": 4000, "slideShowAutoPlay": 0, "slideShowAutoStop": 0, "countTimer": 1, "countTimerBg": "rgba(255,255,255,0.25)", "countTimerColor": "rgba(255,255,255,0.75)", "counterMessage": "[index] \/ [total]", "zoomTo": "auto", "minZoom": "1.20", "maxZoom": "4.00", "videoRatio": 1.7777777777777777, "videoMaxWidth": 1180, "videoAutoPlay": 1, "videoThumbnail": 0, "mediaelement": 0, "attraction": { "slider": 0.055, "slide": 0.018, "thumbs": 0.016 }, "friction": { "slider": 0.62, "slide": 0.18, "thumbs": 0.22 } }; var mobx_accessibility = { "closeLabel": "Cerrar", "downloadLabel": "Descargar", "fullScreenLabel": "Pantalla completa", "nextLabel": "Siguiente", "prevLabel": "Anterior", "shareLabel": "Compartir", "playLabel": "Slideshow", "zoomLabel": "Zoom", "title": 1 };  var mobx_google_fonts = ""; document.addEventListener("DOMContentLoaded", function () {
+                        var mobx = new ModuloBox(mobx_options);
+                        // svg-icons module
+                        // Get/Append Inline SVG
+                        if (typeof mobx_svg_icons !== "undefined" && mobx_svg_icons) {
+
+                            var ajax = new XMLHttpRequest();
+
+                            ajax.open("GET.html", mobx_svg_icons, true);
+                            ajax.send();
+
+                            ajax.onload = function () {
+
+                                var div = document.createElement("DIV");
+                                div.style.display = "none";
+                                div.innerHTML = ajax.responseText;
+                                document.body.insertBefore(div, document.body.childNodes[0]);
+
+                            };
+
+                        }
+
+                        // Inline SVG use and accessibility
+                        mobx.on("beforeAppendDOM.modulobox", function (DOM) {
+
+                            var svgns = "http://www.w3.org/2000/svg",
+                                xlink = "http://www.w3.org/1999/xlink";
+
+                            for (var type in this.buttons) {
+
+                                if (this.buttons.hasOwnProperty(type)) {
+
+                                    if (typeof mobx_accessibility !== "undefined" && mobx_accessibility[type + "Label"]) {
+
+                                        this.buttons[type].setAttribute("aria-label", mobx_accessibility[type + "Label"]);
+
+                                        if (mobx_accessibility.title) {
+
+                                            this.buttons[type].setAttribute("title", mobx_accessibility[type + "Label"]);
+
+                                        }
+
+                                    }
+
+                                    var svg = document.createElementNS(svgns, "svg");
+                                    var use = document.createElementNS(svgns, "use");
+
+                                    svg.setAttribute("class", "mobx-svg");
+                                    use.setAttribute("class", "mobx-use");
+                                    svg.appendChild(use).setAttributeNS(xlink, "xlink:href", "#mobx-svg-" + type.toLowerCase());
+                                    this.buttons[type].appendChild(svg);
+
+                                    if (["fullScreen", "play", "zoom"].indexOf(type) > -1) {
+
+                                        var href;
+
+                                        switch (type) {
+                                            case "fullScreen":
+                                                href = "unfullscreen";
+                                                break;
+                                            case "play":
+                                                href = "pause";
+                                                break;
+                                            case "zoom":
+                                                href = "zoom-out";
+                                                break;
+                                        }
+
+                                        svg = svg.cloneNode(true);
+                                        svg.firstElementChild.setAttributeNS(xlink, "xlink:href", "#mobx-svg-" + href);
+                                        this.buttons[type].appendChild(svg);
+
+                                    }
+
+                                }
+
+                            }
+
+                        });
+
+                        jQuery(document).ajaxSuccess(function (event, xhr, settings) {
+
+                            if (settings && settings.data && (settings.data || "").indexOf("the_grid_load_more") >= 0) {
+                                mobx.getGalleries();
+                            }
+
+                        });
+
+                        var closeForm = function (event) { if (["card__close"].indexOf(event.target.className) > -1) { mobx.close(); } }; document.addEventListener("click", closeForm, false);
+                        mobx.init();
+                    });
+                })(jQuery)
+            </script>
+            </script>
+            <!-- JS -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="js/jquery.flexslider-min.js"></script>
+            <script src="js/jquery.fancybox.pack.js"></script>
+            <script src="js/main.js"></script>
+            <script
+                type="text/javascript">window.$crisp = []; window.CRISP_WEBSITE_ID = "34c1fe59-8545-4fcd-b0c4-4661bf6dcc3d"; (function () { d = document; s = d.createElement("script"); s.src = "https://client.crisp.chat/l.js"; s.async = 1; d.getElementsByTagName("head")[0].appendChild(s); })();</script>
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-201973230-1">
+            </script>
+            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+            <script>
+                AOS.init();
+            </script>
+</body>
+
+</html>
