@@ -78,16 +78,16 @@
   height: 100%;
   width: 300px;
 }
-.prev,
-.next {
+.prev12,
+.next12 {
   display: inline-block;
   width: 50%;
   height: 100%;
   position: absolute;
   cursor: pointer;
 }
-.prev:hover,
-.next:hover {
+.prev12:hover,
+.next12:hover {
   background-color: antiquewhite;
 }
 .buttons-testimonial {
@@ -102,14 +102,14 @@
   background-color: white;
   overflow: hidden;
 }
-.prev {
+.prev12 {
   left: 0;
 }
-.next {
+.next12 {
   right: 0;
 }
-.next::after,
-.prev::after {
+.next12::after,
+.prev12::after {
   content: "";
   position: absolute;
   height: 100%;
@@ -118,10 +118,10 @@
   background-position: center;
   background-size: auto;
 }
-.next::after {
+.next12::after {
   background-image: url("../images/portafolio/icon-next.svg");
 }
-.prev::after {
+.prev12::after {
   background-image: url("../images/portafolio/icon-prev.svg");
 }
 @media only screen and (min-width: 768px) {
@@ -157,4 +157,7 @@
   .buttons {
     top: 180px;
   }
+}
+.active {
+  display: none;
 }
